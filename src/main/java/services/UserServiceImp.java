@@ -3,6 +3,7 @@ package services;
 import entities.User;
 import repositories.UserDao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImp implements UserService{
@@ -14,26 +15,36 @@ public class UserServiceImp implements UserService{
 
     @Override
     public User getUserById(int UserId) {
-        return null;
+        try {
+            return dao.getUserById(UserId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return dao.getAllUsers();
     }
 
     @Override
     public User addUser(User user) {
-        return null;
+        return dao.addUser(user);
     }
 
     @Override
     public User updateUser(User user) {
-        return null;
+        return dao.updateUser(user);
     }
 
     @Override
     public User DeleteUser(int idUser) {
-        return null;
+        return dao.DeleteUser(idUser);
+    }
+
+    @Override
+    public User login(String login, String password) {
+
+        return dao.login(login,password);
     }
 }

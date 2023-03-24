@@ -12,6 +12,10 @@
 	  <a class="active" href="<%=request.getContextPath()%>/game">Game</a>
 	  <a href="<%=request.getContextPath()%>/leaderboard">Leaderboard</a>
 	  <a href="#about">About</a>
+		<form action="game" method="POST">
+			<input type=hidden name="logout">
+			<input type="submit" value="logout">
+		</form>
 	</div>
 	
 	<section class="container">

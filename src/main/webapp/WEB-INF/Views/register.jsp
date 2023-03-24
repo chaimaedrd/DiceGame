@@ -15,17 +15,17 @@
 	<form action="register" method="post">
 	  <div class="container">
 	  
-	  	<label for="fname"><b>First Name</b></label>
-	    <input type="text" placeholder="Enter First name..." id="fname" name="fname" required>
+	  	<label for="firstName"><b>First Name</b></label>
+	    <input type="text" placeholder="Enter First name..." id="firstName" name="firstName" required>
 	  
-	  	<label for="lname"><b>Last Name</b></label>
-	    <input type="text" placeholder="Enter Last name..." id="lname" name="lname" required>
+	  	<label for="lastName"><b>Last Name</b></label>
+	    <input type="text" placeholder="Enter Last name..." id="lastName" name="lastName" required>
 	  
-	    <label for="email"><b>Email</b></label>
-	    <input type="email" placeholder="Enter Email..." id="email" name="email" required>
+	    <label for="login"><b>Email</b></label>
+	    <input type="text" placeholder="Enter login..." id="login" name="login" required>
 	
-	    <label for="psw"><b>Password</b></label>
-	    <input type="password" placeholder="Enter Password...." id="psw" name="psw" required>
+	    <label for="password"><b>Password</b></label>
+	    <input type="password" placeholder="Enter Password...." id="password" name="password" required>
 	        
 	    <button type="submit">Register</button>
 	  </div>

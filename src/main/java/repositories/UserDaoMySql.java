@@ -30,7 +30,7 @@ public class UserDaoMySql implements UserDao{
             while(rs.next()){
                 user = new User();
                 user.setUserId(rs.getInt("id"));
-                user.setFirstName(rs.getString("firstn=Name"));
+                user.setFirstName(rs.getString("firstName"));
                 user.setLastName(rs.getString("lastName"));
                 user.setLogin(rs.getString("login"));
                 user.setPassword(rs.getString("password"));
@@ -39,7 +39,7 @@ public class UserDaoMySql implements UserDao{
             rs.close();
             st.close();
             this.con.close();
-        }catch(Exception e){
+        }catch(SQLException e){
             e.printStackTrace();
         }
         return user;
@@ -138,4 +138,34 @@ public class UserDaoMySql implements UserDao{
         }
         return user;
     }
+
+    @Override
+    public User login(String login, String password) {
+        User user = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeeproject", "root", "");
+            st = con.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?");
+            st.setString(1,login);
+            st.setString(2,password);
+            rs = st.executeQuery();
+            while(rs.next()){
+                user = new User();
+                user.setUserId(rs.getInt("id"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setLogin(rs.getString("login"));
+                user.setPassword(rs.getString("password"));
+                user.setBestScore(rs.getInt("bestScore"));
+            }
+            rs.close();
+            st.close();
+            this.con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+
 }

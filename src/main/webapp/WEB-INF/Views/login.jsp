@@ -12,13 +12,13 @@
 <h1>Welcome to Dice Game Authentication</h1>
 
 <section id="container-section">
-	<form action="login" method="post">
+	<form action="<%=request.getContextPath()%>/login" method="post">
 	  <div class="container">
 	    <label for="email"><b>Email</b></label>
-	    <input type="email" placeholder="Enter Email..." id="email" name="email" required>
+	    <input type="text" placeholder="Enter Email..." id="email" name="login" required>
 	
 	    <label for="psw"><b>Password</b></label>
-	    <input type="password" placeholder="Enter Password..." id="psw" name="psw" required>
+	    <input type="password" placeholder="Enter Password..." id="psw" name="password" required>
 	        
 	    <button type="submit">Login</button>
 	  </div>

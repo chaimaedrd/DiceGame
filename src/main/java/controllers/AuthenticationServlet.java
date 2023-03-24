@@ -9,24 +9,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repositories.UserDaoMySql;
+import services.UserServiceImp;
 
 
 @WebServlet("/login")
 public class AuthenticationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private UserServiceImp service;
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		this.service = new UserServiceImp(new UserDaoMySql());
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		UserDaoMySql dao = new UserDaoMySql();
-		User user = new User();
-		user.setUserId(1);
-		user.setFirstName("yassine");
-		user.setLastName("dardouri");
-		user.setLogin("chaimae");
-		user.setPassword("chaimae123");
-		user.setBestScore(12);
-
-		System.out.println(dao.getAllUsers());
 
 		if(request.getSession().getAttribute("isLogged") != null &&
 		Boolean.parseBoolean(request.getSession().getAttribute("isLogged").toString())) {
@@ -38,7 +36,13 @@ public class AuthenticationServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("isLogged", true);
+
+		User user = service.login(request.getParameter("login"),request.getParameter("password"));
+		if(user!=null){
+			request.getSession().setAttribute("isLogged", true);
+			request.getSession().setAttribute("loggedUser", user);
+			request.getRequestDispatcher("/WEB-INF/Views/index.jsp").forward(request, response);
+		}
 		doGet(request, response);
 	}
 

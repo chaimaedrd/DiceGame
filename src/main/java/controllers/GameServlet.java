@@ -30,8 +30,12 @@ public class GameServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getSession().setAttribute("isLogged", false);
+
+
+		if(request.getParameter("logout")!=null){
+			request.getSession().removeAttribute("loggedUser");
+			request.getSession().removeAttribute("isLogged");
+		}
 		doGet(request, response);
 	}
 
