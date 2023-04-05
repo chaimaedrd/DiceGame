@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import entities.User;
 import jakarta.servlet.ServletException;
@@ -39,9 +40,9 @@ public class AuthenticationServlet extends HttpServlet {
 
 		User user = service.login(request.getParameter("login"),request.getParameter("password"));
 		if(user!=null){
+			request.getSession().setAttribute("rounds", new HashMap<>());
 			request.getSession().setAttribute("isLogged", true);
 			request.getSession().setAttribute("loggedUser", user);
-			request.getRequestDispatcher("/WEB-INF/Views/index.jsp").forward(request, response);
 		}
 		doGet(request, response);
 	}

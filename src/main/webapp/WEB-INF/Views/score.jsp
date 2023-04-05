@@ -1,3 +1,5 @@
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +23,16 @@
 		<div class="game-over">
 			<h2>Game Over</h2>
 						
-			<h3>Your current score is : 20</h3>
+			<h3>Your current score is : <%=request.getSession().getAttribute("score")%></h3>
+
+			<%
+	  		for(Map.Entry<Integer,Integer> entry : ((HashMap<Integer, Integer>)request.getSession().getAttribute("rounds")).entrySet()){
+	  		%>
+			<h3> <%=entry.getValue()%> </h3>
+			<%
+			}
+			%>
+
 			<h3>Your best score is : 38</h3>
 		</div>
 	  	  	
